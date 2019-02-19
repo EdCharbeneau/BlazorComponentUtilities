@@ -80,7 +80,7 @@ protected override void OnParametersSet()
                         .AddClass("bl-nav-link")
                         .AddClass("bl-active", when: IsActive)
                         .AddClass("bl-disabled", when: Disabled)
-						.AddClass("bl-${SomeValue}", when: IsConditionMet)
+			.AddClass("bl-${SomeValue}", when: IsConditionMet)
                         .Build();
 }
 ```
