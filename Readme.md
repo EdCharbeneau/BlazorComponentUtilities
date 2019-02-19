@@ -84,3 +84,39 @@ protected override void OnParametersSet()
                         .Build();
 }
 ```
+
+## Func When
+
+Func<bool> is also accepted as an arguement for the `when` parameter. This allows either inline functions or named functions to be called directly.
+	
+```csharp
+protected override void OnParametersSet()
+{
+    ClassToRender = new CssBuilder(UserCss)
+                        .AddClass("bl-nav-link")
+			.AddClass("bl-foo", when: ()=> 
+			   !string.IsNullOrEmpty(Foo) ||
+                           !Disabled ||
+                           IsActive)
+                        .AddClass("bl-active", when: IsActive)
+                        .AddClass("bl-disabled", when: Disabled)
+                        .Build();
+}
+```
+
+Named function, example.
+
+```csharp
+
+bool HasMeaningfulName() => !string.IsNullOrEmpty(Foo) || !Disabled || IsActive);
+
+protected override void OnParametersSet()
+{
+    ClassToRender = new CssBuilder(UserCss)
+                        .AddClass("bl-nav-link")
+			.AddClass("bl-foo", when: HasMeaningfulName)
+                        .AddClass("bl-active", when: IsActive)
+                        .AddClass("bl-disabled", when: Disabled)
+                        .Build();
+}
+```
