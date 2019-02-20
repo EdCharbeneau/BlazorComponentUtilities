@@ -49,7 +49,7 @@ The refactored code becomes:
 **Component Source Markup (refactor)**
 ```html
 <li class="bl-nav-item">
-    <a onclick=@Activate class="@CssToRender" role="button">
+    <a onclick=@Activate class="@ClassToRender" role="button">
         @Title
     </a>
 </li>
