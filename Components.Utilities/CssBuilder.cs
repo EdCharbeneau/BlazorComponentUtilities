@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Components.Utilities
 {
@@ -36,7 +37,7 @@ namespace Components.Utilities
         /// </summary>
         /// <param name="value">CSS Class to add</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(string value) => AddValue(" ").AddValue(value);
+        public CssBuilder AddClass(string value) => AddValue(" " + value);
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space seperator.
