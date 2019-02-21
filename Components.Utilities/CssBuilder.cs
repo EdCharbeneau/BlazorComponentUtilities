@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 
 namespace Components.Utilities
 {
-    public class CssBuilder
+    public struct CssBuilder
     {
         private string stringBuffer;
-
-        /// <summary>
-        /// Creates a CssBuilder used to define conditional CSS classes used in a component.
-        /// Call Build() to return the completed CSS Classes as a string. 
-        /// </summary>
-        public CssBuilder() { }
 
         /// <summary>
         /// Creates a CssBuilder used to define conditional CSS classes used in a component.
