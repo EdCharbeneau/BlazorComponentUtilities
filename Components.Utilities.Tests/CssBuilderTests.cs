@@ -4,29 +4,46 @@ using Xunit;
 
 namespace Components.Utilities.Tests
 {
-    public class StyleBuilderTests
+    public class CssBuilderTests
     {
         [Fact]
-        public void ShouldBulidConditionalCssStyles()
+        public void ShouldBulidConditionalCssClasses()
         {
             //arrange
-            var hasBorder = true;
-            var isOnTop = false;
+            var hasTwo = false;
+            var hasThree = true;
+            Func<bool> hasFive = () => false;
 
             //act
-            var top = 2;
-            var bottom = 10;
-            var left = 4;
-            var right = 20;
-            var ClassToRender = new StyleBuilder("background-color", "DodgerBlue")
-                            .AddStyle("border-width", $"{top}px {right}px {bottom}px {left}px", when: hasBorder)
-                            .AddStyle("z-index", "999", when: isOnTop)
-                            .AddStyle("z-index", "-1", when: !isOnTop)
-                            .AddStyle("padding", "35px")
+            var ClassToRender = new CssBuilder("item-one")
+                            .AddClass("item-two", when: hasTwo)
+                            .AddClass("item-three", when: hasThree)
+                            .AddClass("item-four")
+                            .AddClass("item-five", when: hasFive)
                             .Build();
             //assert
-            ClassToRender.Should().Be("background-color:DodgerBlue;border-width:2px 20px 10px 4px;z-index:-1;padding:35px;");
+            ClassToRender.Should().Be("item-one item-three item-four");
         }
+        [Fact]
+        public void ShouldBulidConditionalCssBuilderClasses()
+        {
+            //arrange
+            var hasTwo = false;
+            var hasThree = true;
+            Func<bool> hasFive = () => false;
 
+            //act
+            var ClassToRender = new CssBuilder("item-one")
+                            .AddClass("item-two", when: hasTwo)
+                            .AddClass(new CssBuilder("item-three")
+                                            .AddClass("item-foo", false)
+                                            .AddClass("item-sub-three"), 
+                                            when: hasThree)
+                            .AddClass("item-four")
+                            .AddClass("item-five", when: hasFive)
+                            .Build();
+            //assert
+            ClassToRender.Should().Be("item-one item-three item-sub-three item-four");
+        }
     }
 }
