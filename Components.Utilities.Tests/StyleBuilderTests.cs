@@ -12,12 +12,12 @@ namespace Components.Utilities.Tests
             //arrange
             var hasBorder = true;
             var isOnTop = false;
-
-            //act
             var top = 2;
             var bottom = 10;
             var left = 4;
             var right = 20;
+
+            //act
             var ClassToRender = new StyleBuilder("background-color", "DodgerBlue")
                             .AddStyle("border-width", $"{top}px {right}px {bottom}px {left}px", when: hasBorder)
                             .AddStyle("z-index", "999", when: isOnTop)
