@@ -58,7 +58,7 @@ namespace Components.Utilities
         /// <param name="builder">CSS Style Builder to conditionally add.</param>
         /// <param name="when">Conditon in which the CSS Style is added.</param>
         /// <returns>StyleBuilder</returns>
-        public StyleBuilder AddStyle(StyleBuilder builder, bool when = true) => when ? this.AddValue(builder.ToString()) : this;
+        public StyleBuilder AddStyle(StyleBuilder builder, bool when = true) => when ? this.AddValue(builder.Build()) : this;
 
         /// <summary>
         /// Adds a conditional CSS Style to the builder with space seperator.
@@ -72,7 +72,13 @@ namespace Components.Utilities
         /// Finalize the completed CSS Style as a string.
         /// </summary>
         /// <returns>string</returns>
-        public string Build() => ToString();
-        public override string ToString() => stringBuffer.Trim();
+        public string Build()
+        {
+            // String buffer finalization code
+            return stringBuffer.Trim();
+        }
+
+        // ToString should only and always call Build to finalize the rendered string.
+        public override string ToString() => Build();
     }
 }

@@ -61,14 +61,19 @@ namespace Components.Utilities
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Conditon in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder.Build(), when());
+        public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder, when());
 
         /// <summary>
         /// Finalize the completed CSS Classes as a string.
         /// </summary>
         /// <returns>string</returns>
-        public string Build() => ToString();
-        public override string ToString() => stringBuffer.Trim();
+        public string Build() {
+            // String buffer finalization code
+            return stringBuffer.Trim();
+        }
+
+        // ToString should only and always call Build to finalize the rendered string.
+        public override string ToString() => Build();
 
     }
 }
