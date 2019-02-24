@@ -61,7 +61,7 @@ namespace Components.Utilities
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Conditon in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(CssBuilder builder, bool when = true) => when ? this.AddClass(builder.ToString()) : this;
+        public CssBuilder AddClass(CssBuilder builder, bool when = true) => when ? this.AddClass(builder.Build()) : this;
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space seperator.
@@ -69,7 +69,7 @@ namespace Components.Utilities
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Conditon in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder.ToString(), when());
+        public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder.Build(), when());
 
         /// <summary>
         /// Finalize the completed CSS Classes as a string.
