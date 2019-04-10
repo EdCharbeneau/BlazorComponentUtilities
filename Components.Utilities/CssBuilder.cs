@@ -14,7 +14,7 @@ namespace Components.Utilities
         public CssBuilder(string value) => stringBuffer = value;
 
         /// <summary>
-        /// Adds a raw string to the builder that will be concatinated with the next class or value added to the builder.
+        /// Adds a raw string to the builder that will be concatenated with the next class or value added to the builder.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>CssBuilder</returns>
@@ -25,41 +25,41 @@ namespace Components.Utilities
         }
 
         /// <summary>
-        /// Adds a CSS Class to the builder with space seperator.
+        /// Adds a CSS Class to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to add</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(string value) => AddValue(" " + value);
 
         /// <summary>
-        /// Adds a conditional CSS Class to the builder with space seperator.
+        /// Adds a conditional CSS Class to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Class is added.</param>
+        /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(string value, bool when = true) => when ? this.AddClass(value) : this;
 
         /// <summary>
-        /// Adds a conditional CSS Class to the builder with space seperator.
+        /// Adds a conditional CSS Class to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Class is added.</param>
+        /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(string value, Func<bool> when = null) => this.AddClass(value, when());
 
         /// <summary>
-        /// Adds a conditional CSS Class to the builder with space seperator.
+        /// Adds a conditional CSS Class to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Class is added.</param>
+        /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(CssBuilder builder, bool when = true) => when ? this.AddClass(builder.Build()) : this;
 
         /// <summary>
-        /// Adds a conditional CSS Class to the builder with space seperator.
+        /// Adds a conditional CSS Class to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Class is added.</param>
+        /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(CssBuilder builder, Func<bool> when = null) => this.AddClass(builder, when());
 
