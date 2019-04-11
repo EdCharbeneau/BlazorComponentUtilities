@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Components.Utilities
+namespace BlazorComponentUtilities
 {
     public struct StyleBuilder
     {
@@ -15,7 +15,7 @@ namespace Components.Utilities
         public StyleBuilder(string prop, string value) => stringBuffer = stringBuffer = $"{prop}:{value};";
 
         /// <summary>
-        /// Adds a raw string to the builder that will be concatinated with the next class or value added to the builder.
+        /// Adds a raw string to the builder that will be concatenated with the next class or value added to the builder.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value"></param>
@@ -27,7 +27,7 @@ namespace Components.Utilities
         }
 
         /// <summary>
-        /// Adds a CSS Style to the builder with space seperator.
+        /// Adds a CSS Style to the builder with space separator.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value">CSS Style to add</param>
@@ -35,36 +35,36 @@ namespace Components.Utilities
         public StyleBuilder AddStyle(string prop, string value) => AddValue($"{prop}:{value};");
 
         /// <summary>
-        /// Adds a conditional CSS Style to the builder with space seperator.
+        /// Adds a conditional CSS Style to the builder with space separator.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value">CSS Style to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Style is added.</param>
+        /// <param name="when">Condition in which the CSS Style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(string prop, string value, bool when = true) => when ? this.AddStyle(prop, value) : this;
 
         /// <summary>
-        /// Adds a conditional CSS Style to the builder with space seperator.
+        /// Adds a conditional CSS Style to the builder with space separator.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value">CSS Style to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Style is added.</param>
+        /// <param name="when">Condition in which the CSS Style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(string prop, string value, Func<bool> when = null) => this.AddStyle(prop, value, when());
 
         /// <summary>
-        /// Adds a conditional CSS Style to the builder with space seperator.
+        /// Adds a conditional CSS Style to the builder with space separator.
         /// </summary>
         /// <param name="builder">CSS Style Builder to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Style is added.</param>
+        /// <param name="when">Condition in which the CSS Style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder, bool when = true) => when ? this.AddValue(builder.Build()) : this;
 
         /// <summary>
-        /// Adds a conditional CSS Style to the builder with space seperator.
+        /// Adds a conditional CSS Style to the builder with space separator.
         /// </summary>
         /// <param name="builder">CSS Style Builder to conditionally add.</param>
-        /// <param name="when">Conditon in which the CSS Styles are added.</param>
+        /// <param name="when">Condition in which the CSS Styles are added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder, Func<bool> when = null) => this.AddStyle(builder, when());
 

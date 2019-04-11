@@ -2,7 +2,7 @@ using FluentAssertions;
 using System;
 using Xunit;
 
-namespace Components.Utilities.Tests
+namespace BlazorComponentUtilities.Tests
 {
     public class StyleBuilderTests
     {

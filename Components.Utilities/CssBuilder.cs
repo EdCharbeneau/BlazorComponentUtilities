@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Components.Utilities
+namespace BlazorComponentUtilities
 {
     public struct CssBuilder
     {
