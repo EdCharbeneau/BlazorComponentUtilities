@@ -75,7 +75,7 @@ namespace BlazorComponentUtilities
         public string Build()
         {
             // String buffer finalization code
-            return stringBuffer.Trim();
+            return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
         }
 
         // ToString should only and always call Build to finalize the rendered string.

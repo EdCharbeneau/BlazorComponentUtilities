@@ -45,5 +45,18 @@ namespace BlazorComponentUtilities.Tests
             //assert
             ClassToRender.Should().Be("item-one item-three item-sub-three item-four");
         }
+        [Fact]
+        public void ShouldBulidEmptyClasses()
+        {
+            //arrange
+            var shouldShow = false;
+
+            //act
+            var ClassToRender = new CssBuilder()
+                            .AddClass("some-class", shouldShow)
+                            .Build();
+            //assert
+            ClassToRender.Should().Be(string.Empty);
+        }
     }
 }
