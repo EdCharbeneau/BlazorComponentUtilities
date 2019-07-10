@@ -14,7 +14,9 @@
     <Authors>Ed Charbeneau</Authors>
     <Company>Blazor StateHasChanged Show</Company>
     <Product>BlazorComponentUtilities CssBuilder</Product>
-    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    <PackageReleaseNotes>Stability fixes.
+- Guards added for Null Ref Exception when CssClass is empty</PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
