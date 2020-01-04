@@ -84,6 +84,29 @@ protected override void OnParametersSet()
                         .Build();
 }
 ```
+## Attribute Splatting
+
+If you encounter a dynamic values due to [attribute splatting](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#attribute-splatting-and-arbitrary-parameters), we can easily handle this as well.
+Consider the senario where we need to merge a splatted CSS attribute while preserving default values.
+
+```html
+<!-- API -->
+<MyComponent class="custom-value"/>
+<!-- Output -->
+<div class="my-base custom-value"/>
+```
+
+```csharp
+<div @attributes="AdditionalAttributes" class="@CssClass">
+
+@code {
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, Object>();
+
+    CssBuilder CssClass => new CssBuilder("my-base").AddClassFromAttributes(attributes);
+}
+```
 
 ## Func When
 

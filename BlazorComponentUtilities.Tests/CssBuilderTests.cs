@@ -1,5 +1,6 @@
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace BlazorComponentUtilities.Tests
@@ -57,6 +58,74 @@ namespace BlazorComponentUtilities.Tests
                             .Build();
             //assert
             ClassToRender.Should().Be(string.Empty);
+        }
+
+        [Fact]
+        public void ShouldBuildClassesWithFunc()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", "my-custom-class-1" } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .AddClass(()=> attributes["class"].ToString(), when: attributes.ContainsKey("class"))
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one my-custom-class-1");
+            }
+        }
+
+        [Fact]
+        public void ShouldBuildClassesFromAttributes()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", "my-custom-class-1" } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .AddClassFromAttributes(attributes)
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one my-custom-class-1");
+            }
+        }
+
+        [Fact]
+        public void ShouldNotThrowWhenNullFor_BuildClassesFromAttributes()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = null;
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .AddClassFromAttributes(attributes)
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one");
+            }
+        }
+
+        [Fact]
+        public void ShouldNotThrowNoKeyExceptionWithDictionary()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "foo", "bar" } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .AddClass(() => attributes["string"].ToString(), when: attributes.ContainsKey("class"))
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one");
+            }
         }
     }
 }
