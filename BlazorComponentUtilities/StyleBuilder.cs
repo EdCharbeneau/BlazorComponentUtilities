@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BlazorComponentUtilities
 {
@@ -67,6 +68,17 @@ namespace BlazorComponentUtilities
         /// <param name="when">Condition in which the CSS Styles are added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder, Func<bool> when = null) => this.AddStyle(builder, when());
+
+        /// <summary>
+        /// Adds a conditional CSS Class when it exists in a dictionary to the builder with space separator.
+        /// Null safe operation.
+        /// </summary>
+        /// <param name="additionalAttributes">Additional Attribute splat parameters</param>
+        /// <returns>CssBuilder</returns>
+        public StyleBuilder AddStyleFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
+            additionalAttributes == null ? this :
+                !additionalAttributes.ContainsKey("style") ? this :
+                    this.AddValue(additionalAttributes["style"].ToString());
 
         /// <summary>
         /// Finalize the completed CSS Style as a string.
