@@ -15,8 +15,12 @@
     <Authors>Ed Charbeneau</Authors>
     <Company>Blazor StateHasChanged Show</Company>
     <Product>BlazorComponentUtilities CssBuilder</Product>
-    <PackageReleaseNotes>Added utlitiy mehtod for Attribute Splatting</PackageReleaseNotes>
-    <Version>1.2.1</Version>
+    <PackageReleaseNotes>
+      Added utlitiy mehtod for Attribute Splatting.
+      Added utility method for returning null for empty strings. This is useful for splatting scenarios.
+      Added utility method for starting off new builders.
+    </PackageReleaseNotes>
+    <Version>1.3.0</Version>
     <PackageIcon>blazor-glove-256.jpg</PackageIcon>
   </PropertyGroup>
 

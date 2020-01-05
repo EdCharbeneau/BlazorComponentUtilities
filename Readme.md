@@ -91,9 +91,9 @@ Consider the senario where we need to merge a splatted CSS attribute while prese
 
 ```html
 <!-- API -->
-<MyComponent class="custom-value"/>
+<MyComponent class="custom-value">
 <!-- Output -->
-<div class="my-base custom-value"/>
+<div class="my-base custom-value">
 ```
 
 ```csharp
@@ -141,5 +141,28 @@ protected override void OnParametersSet()
                         .AddClass("bl-active", when: IsActive)
                         .AddClass("bl-disabled", when: Disabled)
                         .Build();
+}
+```
+## Removing Unused Attributes
+
+When using dyanmic attributes may result in empty attribute. When Blazor renders an attribute that has an empty string value, it will result in an empty attribute tag.
+However, if the value is null the attribute will be excluded. When an empty attribute is expected, the extension method NullIfEmpty can be used to clean up the resulting markup.
+Note: This method is only necessary when no default value is supplied. Ex: new CssBuilder() or CssBuilder().Empty(). Forgetting to call NullIfEmpty should not have any impact on the UI.
+
+```html
+<!-- Output with Empty String -->
+<div class="">
+
+<!-- Output with null -->
+<div>
+```
+
+```csharp
+<div class="@CssClass">
+
+@code {
+
+    //string CssClass => new CssBuilder().AddClassFromAttributes(attributes).Build();
+    string CssClass => new CssBuilder().AddClassFromAttributes(attributes).NullIfEmpty();
 }
 ```

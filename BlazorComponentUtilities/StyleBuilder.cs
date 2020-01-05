@@ -13,6 +13,20 @@ namespace BlazorComponentUtilities
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value"></param>
+        public static StyleBuilder Default(string prop, string value) => new StyleBuilder(prop, value);
+
+        /// <summary>
+        /// Creates an empty StyleBuilder used to define conditional CSS Style used in a component.
+        /// Call Build() to return the completed CSS Style as a string. 
+        /// </summary>
+        public static StyleBuilder Empty() => new StyleBuilder();
+
+        /// <summary>
+        /// Creates a StyleBuilder used to define conditional CSS Style used in a component.
+        /// Call Build() to return the completed CSS Style as a string. 
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="value"></param>
         public StyleBuilder(string prop, string value) => stringBuffer = stringBuffer = $"{prop}:{value};";
 
         /// <summary>

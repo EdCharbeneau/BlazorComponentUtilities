@@ -7,6 +7,28 @@ namespace BlazorComponentUtilities.Tests
 {
     public class CssBuilderTests
     {
+
+        [Fact]
+        public void ShouldConstructWithDefaultValue()
+        {
+            //arrange
+            var ClassToRender = CssBuilder.Default("item-one").Build();
+
+            //assert
+            ClassToRender.Should().Be("item-one");
+        }
+
+
+        [Fact]
+        public void ShouldConstructWithEmpty()
+        {
+            //arrange
+            var ClassToRender = CssBuilder.Empty().NullIfEmpty();
+
+            //assert
+            ClassToRender.Should().BeNull();
+        }
+
         [Fact]
         public void ShouldBulidConditionalCssClasses()
         {
@@ -108,6 +130,23 @@ namespace BlazorComponentUtilities.Tests
                                 .Build();
                 //assert
                 ClassToRender.Should().Be("item-one");
+            }
+        }
+
+        [Fact]
+        public void ForceNullForWhitespace_BuildClassesFromAttributes()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = null;
+
+                //act
+                var ClassToRender = new CssBuilder()
+                                .AddClassFromAttributes(attributes)
+                                .NullIfEmpty();
+                //assert
+                ClassToRender.Should().BeNull();
             }
         }
 
