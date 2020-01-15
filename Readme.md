@@ -9,7 +9,7 @@ A clean code approach to conditional CSS in Razor Components.
 ## The problem
 
 Given the component below, the Tab's CSS class is set by multiple sources.
-The componet has paramater `UserCss` which can be set at externally.
+The component has paramater `UserCss` which can be set at externally.
 A base CSS class `bl-nav-link` which does not change.
 Two state based CSS classes `bl-active` and `bl-disabled` which are dependent on if the Tab is active or disabled.
 Rendering for the CSS class is spread across multiple concerns and is hard to maintain.
@@ -38,7 +38,7 @@ protected string DisabledCssClass => Disabled ? "bl-disabled" : String.Empty;
 
 Using the CSS Builder pattern we can clean up the code and move everything to a single concern.
 Refactoring the component, we move all of the CSS code to the components logic.
-In the `OnParameterSet` lifecycle method, we condence all of the CSS responsibilities into a single variable `ClassToRender` (this name variable is optional).
+In the `OnParameterSet` lifecycle method, we condense all of the CSS responsibilities into a single variable `ClassToRender` (this name variable is optional).
 Next, using the `CssBuilder` we define what classes should be added to the builder and when they should be rendered.
 The pattern is as follows `AddClass` the CSS class and the condition when it should appear `AddClass(value, when: bool)`.
 If the value is static, we can discard the `when` parameter.
@@ -86,7 +86,7 @@ protected override void OnParametersSet()
 ```
 ## Attribute Splatting
 
-If you encounter a dynamic values due to [attribute splatting](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#attribute-splatting-and-arbitrary-parameters), we can easily handle this as well.
+If you encounter dynamic values due to [attribute splatting](https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#attribute-splatting-and-arbitrary-parameters), we can easily handle this as well.
 Consider the senario where we need to merge a splatted CSS attribute while preserving default values.
 
 ```html
@@ -145,7 +145,7 @@ protected override void OnParametersSet()
 ```
 ## Removing Unused Attributes
 
-When using dyanmic attributes may result in empty attribute. When Blazor renders an attribute that has an empty string value, it will result in an empty attribute tag.
+When using dynamic attributes may result in empty attribute. When Blazor renders an attribute that has an empty string value, it will result in an empty attribute tag.
 However, if the value is null the attribute will be excluded. When an empty attribute is expected, the extension method NullIfEmpty can be used to clean up the resulting markup.
 Note: This method is only necessary when no default value is supplied. Ex: new CssBuilder() or CssBuilder().Empty(). Forgetting to call NullIfEmpty should not have any impact on the UI.
 
