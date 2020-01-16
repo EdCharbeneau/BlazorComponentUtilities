@@ -78,7 +78,7 @@ namespace BlazorComponentUtilities
         public CssBuilder AddClass(Func<string> value, Func<bool> when = null) => this.AddClass(value, when());
 
         /// <summary>
-        /// Adds a conditional CSS Class to the builder with space separator.
+        /// Adds a conditional nested CssBuilder to the builder with space separator.
         /// </summary>
         /// <param name="value">CSS Class to conditionally add.</param>
         /// <param name="when">Condition in which the CSS Class is added.</param>

@@ -4,7 +4,7 @@
     {
         /// <summary>
         /// Used to convert a CssBuilder into a null when it is empty.
-        /// Usage: class=null causes the attribute to be exclueded when rendered.
+        /// Usage: class=null causes the attribute to be excluded when rendered.
         /// </summary>
         /// <param name="builder"></param>
         /// <returns>string</returns>
@@ -13,7 +13,7 @@
 
         /// <summary>
         /// Used to convert a StyleBuilder into a null when it is empty.
-        /// Usage: style=null causes the attribute to be exclueded when rendered.
+        /// Usage: style=null causes the attribute to be excluded when rendered.
         /// </summary>
         /// <param name="builder"></param>
         /// <returns>string</returns>
@@ -22,7 +22,7 @@
 
         /// <summary>
         /// Used to convert a string.IsNullOrEmpty into a null when it is empty.
-        /// Usage: attribute=null causes the attribute to be exclueded when rendered.
+        /// Usage: attribute=null causes the attribute to be excluded when rendered.
         /// </summary>
         /// <param name="builder"></param>
         /// <returns>string</returns>
