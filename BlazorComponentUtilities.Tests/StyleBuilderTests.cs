@@ -123,6 +123,22 @@ namespace BlazorComponentUtilities.Tests
 
         }
 
+        [Fact]
+        public void ShouldBuildStyleWithFunc()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", "my-custom-class-1" } };
 
+                //act
+                var StyleToRender = StyleBuilder.Empty()
+                                .AddStyle("background-color", ()=>attributes["style"].ToString(), when: attributes.ContainsKey("style"))
+                                .AddStyle("background-color", "black")
+                                .Build();
+                //assert
+                StyleToRender.Should().Be("background-color:black;");
+            }
+        }
     }
 }

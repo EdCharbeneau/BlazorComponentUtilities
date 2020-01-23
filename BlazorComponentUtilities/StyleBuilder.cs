@@ -3,34 +3,32 @@ using System.Collections.Generic;
 
 namespace BlazorComponentUtilities
 {
+
     public struct StyleBuilder
     {
         private string stringBuffer;
 
         /// <summary>
-        /// Creates a StyleBuilder used to define conditional CSS Style used in a component.
-        /// Call Build() to return the completed CSS Style as a string. 
+        /// Creates a StyleBuilder used to define conditional in-line style used in a component. Call Build() to return the completed style as a string.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value"></param>
         public static StyleBuilder Default(string prop, string value) => new StyleBuilder(prop, value);
 
         /// <summary>
-        /// Creates an empty StyleBuilder used to define conditional CSS Style used in a component.
-        /// Call Build() to return the completed CSS Style as a string. 
+        /// Creates a StyleBuilder used to define conditional in-line style used in a component. Call Build() to return the completed style as a string.
         /// </summary>
         public static StyleBuilder Empty() => new StyleBuilder();
 
         /// <summary>
-        /// Creates a StyleBuilder used to define conditional CSS Style used in a component.
-        /// Call Build() to return the completed CSS Style as a string. 
+        /// Creates a StyleBuilder used to define conditional in-line style used in a component. Call Build() to return the completed style as a string.
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value"></param>
         public StyleBuilder(string prop, string value) => stringBuffer = stringBuffer = $"{prop}:{value};";
 
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon.
         /// </summary>
         /// <param name="style"></param>
         public StyleBuilder AddStyle(string style) => AddRaw($"{style};");
@@ -48,56 +46,75 @@ namespace BlazorComponentUtilities
         }
 
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon.
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
         /// </summary>
         /// <param name="prop"></param>
-        /// <param name="value">CSS Style to add</param>
+        /// <param name="value">Style to add</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(string prop, string value) => AddRaw($"{prop}:{value};");
 
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon.
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
         /// </summary>
         /// <param name="prop"></param>
-        /// <param name="value">CSS Style to conditionally add.</param>
-        /// <param name="when">Condition in which the CSS Style is added.</param>
+        /// <param name="value">Style to conditionally add.</param>
+        /// <param name="when">Condition in which the style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(string prop, string value, bool when = true) => when ? this.AddStyle(prop, value) : this;
 
+
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon.
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
         /// </summary>
         /// <param name="prop"></param>
-        /// <param name="value">CSS Style to conditionally add.</param>
-        /// <param name="when">Condition in which the CSS Style is added.</param>
+        /// <param name="value">Style to conditionally add.</param>
+        /// <param name="when">Condition in which the style is added.</param>
+        /// <returns></returns>
+        public StyleBuilder AddStyle(string prop, Func<string> value, bool when = true) => when ? this.AddStyle(prop, value()) : this;
+
+        /// <summary>
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="value">Style to conditionally add.</param>
+        /// <param name="when">Condition in which the style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(string prop, string value, Func<bool> when = null) => this.AddStyle(prop, value, when());
 
         /// <summary>
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="value">Style to conditionally add.</param>
+        /// <param name="when">Condition in which the style is added.</param>
+        /// <returns>StyleBuilder</returns>
+        public StyleBuilder AddStyle(string prop, Func<string> value, Func<bool> when = null) => this.AddStyle(prop, value(), when());
+
+        /// <summary>
         /// Adds a conditional nested StyleBuilder to the builder with separator and closing semicolon.
         /// </summary>
-        /// <param name="builder">CSS Style Builder to conditionally add.</param>
+        /// <param name="builder">Style Builder to conditionally add.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder) => this.AddRaw(builder.Build());
 
         /// <summary>
         /// Adds a conditional nested StyleBuilder to the builder with separator and closing semicolon.
         /// </summary>
-        /// <param name="builder">CSS Style Builder to conditionally add.</param>
-        /// <param name="when">Condition in which the CSS Style is added.</param>
+        /// <param name="builder">Style Builder to conditionally add.</param>
+        /// <param name="when">Condition in which the style is added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder, bool when = true) => when ? this.AddRaw(builder.Build()) : this;
 
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon.
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
         /// </summary>
-        /// <param name="builder">CSS Style Builder to conditionally add.</param>
-        /// <param name="when">Condition in which the CSS Styles are added.</param>
+        /// <param name="builder">Style Builder to conditionally add.</param>
+        /// <param name="when">Condition in which the styles are added.</param>
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyle(StyleBuilder builder, Func<bool> when = null) => this.AddStyle(builder, when());
 
         /// <summary>
-        /// Adds a style to the builder with separator and closing semicolon.
+        /// Adds a conditional in-line style to the builder with space separator and closing semicolon..
         /// A ValueBuilder action defines a complex set of values for the property.
         /// </summary>
         /// <param name="prop"></param>
