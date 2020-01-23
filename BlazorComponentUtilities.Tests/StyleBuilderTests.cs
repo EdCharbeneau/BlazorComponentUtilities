@@ -56,5 +56,73 @@ namespace BlazorComponentUtilities.Tests
             ClassToRender.Should().Be("background-color:DodgerBlue;border-width:2px 20px 10px 4px;z-index:-1;padding:35px;");
         }
 
+        [Fact]
+        public void ShouldAddExistingStyle()
+        {
+            var StyleToRender = StyleBuilder.Empty()
+                .AddStyle("background-color:DodgerBlue;")
+                .AddStyle("padding", "35px")
+                .Build();
+
+            /// Double ;; is valid HTML.
+            /// The CSS syntax allows for empty declarations, which means that you can add leading and trailing semicolons as you like. For instance, this is valid CSS
+            /// .foo { ;;;display:none;;;color:black;;; }
+            /// Trimming is possible, but is it worth the operations for a non-issue?
+            StyleToRender.Should().Be("background-color:DodgerBlue;;padding:35px;");
+
+        }
+
+        [Fact]
+        public void ShouldAddNestedStyles()
+        {
+
+
+            var Child = StyleBuilder.Empty()
+                .AddStyle("background-color", "DodgerBlue")
+                .AddStyle("padding", "35px");
+
+            var StyleToRender = StyleBuilder.Empty()
+                .AddStyle(Child)
+                .AddStyle("z-index", "-1")
+                .Build();
+
+            /// Double ;; is valid HTML.
+            /// The CSS syntax allows for empty declarations, which means that you can add leading and trailing semicolons as you like. For instance, this is valid CSS
+            /// .foo { ;;;display:none;;;color:black;;; }
+            /// Trimming is possible, but is it worth the operations for a non-issue?
+            StyleToRender.Should().Be("background-color:DodgerBlue;padding:35px;z-index:-1;");
+
+        }
+
+        [Fact]
+        public void ShouldAddComplexStyles()
+        {
+            //var td = new StringBuilder();
+            //if (hasStyle.Font_Underline) td.Append("underline ");
+            //if (hasStyle.Font_Overline) td.Append("overline ");
+            //if (hasStyle.Font_Strikeout) td.Append("line-through");
+
+            bool HasFontUnderline = true;
+            bool HasOverline = false;
+            bool HasStrikeout = true;
+
+            var StyleToRender = StyleBuilder.Empty()
+                .AddStyle("text-decoration", v => v
+                            .AddValue("underline", true)
+                            .AddValue("overline", false)
+                            .AddValue("line-through", true),
+                            when: true)
+                .AddStyle("z-index", "-1")
+                .Build();
+
+            /// Double ;; is valid HTML.
+            /// The CSS syntax allows for empty declarations, which means that you can add leading and trailing semicolons as you like. For instance, this is valid CSS
+            /// .foo { ;;;display:none;;;color:black;;; }
+            /// Trimming is possible, but is it worth the operations for a non-issue?
+            StyleToRender.Should().Be("text-decoration:underline line-through;z-index:-1;");
+
+        }
+
+
     }
 }
