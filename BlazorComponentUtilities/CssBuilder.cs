@@ -101,7 +101,7 @@ namespace BlazorComponentUtilities
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClassFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
             additionalAttributes == null ? this :
-            this.AddClass(() => additionalAttributes["class"].ToString(), when: additionalAttributes.ContainsKey("class"));
+            additionalAttributes.TryGetValue("class", out var c) ? AddClass(c.ToString()) : this;
 
         /// <summary>
         /// Finalize the completed CSS Classes as a string.

@@ -117,8 +117,8 @@ namespace BlazorComponentUtilities
         /// <returns>StyleBuilder</returns>
         public StyleBuilder AddStyleFromAttributes(IReadOnlyDictionary<string, object> additionalAttributes) =>
             additionalAttributes == null ? this :
-                !additionalAttributes.ContainsKey("style") ? this :
-                    this.AddRaw(additionalAttributes["style"].ToString());
+            additionalAttributes.TryGetValue("style", out var c) ? AddRaw(c.ToString()) : this;
+
 
         /// <summary>
         /// Finalize the completed Style as a string.
