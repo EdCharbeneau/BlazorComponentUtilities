@@ -18,6 +18,13 @@ namespace BlazorComponentUtilities
         /// <summary>
         /// Creates a StyleBuilder used to define conditional in-line style used in a component. Call Build() to return the completed style as a string.
         /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="value"></param>
+        public static StyleBuilder Default(string style) => Empty().AddStyle(style);
+
+        /// <summary>
+        /// Creates a StyleBuilder used to define conditional in-line style used in a component. Call Build() to return the completed style as a string.
+        /// </summary>
         public static StyleBuilder Empty() => new StyleBuilder();
 
         /// <summary>
@@ -31,7 +38,7 @@ namespace BlazorComponentUtilities
         /// Adds a conditional in-line style to the builder with space separator and closing semicolon.
         /// </summary>
         /// <param name="style"></param>
-        public StyleBuilder AddStyle(string style) => AddRaw($"{style};");
+        public StyleBuilder AddStyle(string style) => !string.IsNullOrWhiteSpace(style) ? AddRaw($"{style};") : this;
 
         /// <summary>
         /// Adds a raw string to the builder that will be concatenated with the next style or value added to the builder.

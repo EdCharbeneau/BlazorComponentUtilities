@@ -1,4 +1,6 @@
-﻿namespace BlazorComponentUtilities
+﻿using System;
+
+namespace BlazorComponentUtilities
 {
     public class ValueBuilder
     {
@@ -12,6 +14,7 @@
         /// <param name="when"></param>
         /// <returns></returns>
         public ValueBuilder AddValue(string value, bool when = true) => when ? AddRaw($"{value} ") : this;
+        public ValueBuilder AddValue(Func<string> value, bool when = true) => when ? AddRaw($"{value()} ") : this;
 
         private ValueBuilder AddRaw(string style)
         {

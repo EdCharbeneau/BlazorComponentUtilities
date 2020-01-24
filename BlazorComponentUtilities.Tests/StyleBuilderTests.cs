@@ -64,11 +64,23 @@ namespace BlazorComponentUtilities.Tests
                 .AddStyle("padding", "35px")
                 .Build();
 
+            var StyleToRenderFromDefaultConstructor = StyleBuilder.Default(StyleToRender).Build();
+
             /// Double ;; is valid HTML.
             /// The CSS syntax allows for empty declarations, which means that you can add leading and trailing semicolons as you like. For instance, this is valid CSS
             /// .foo { ;;;display:none;;;color:black;;; }
             /// Trimming is possible, but is it worth the operations for a non-issue?
             StyleToRender.Should().Be("background-color:DodgerBlue;;padding:35px;");
+            StyleToRenderFromDefaultConstructor.Should().Be("background-color:DodgerBlue;;padding:35px;;");
+
+        }
+
+        [Fact]
+        public void ShouldNotAddEmptyStyle()
+        {
+            var StyleToRender = StyleBuilder.Empty().AddStyle("");
+                
+            StyleToRender.NullIfEmpty().Should().BeNull();
 
         }
 
