@@ -166,5 +166,84 @@ namespace BlazorComponentUtilities.Tests
                 ClassToRender.Should().Be("item-one");
             }
         }
+
+        [Fact]
+        public void ShouldBulidConditionalCssClassesUsingPrefix()
+        {
+            //arrange
+            var hasTwo = false;
+            var hasThree = true;
+            Func<bool> hasFive = () => false;
+
+            //act
+            var ClassToRender = new CssBuilder("default")
+                            .SetPrefix("item-")
+                            .AddClass("two", when: hasTwo)
+                            .AddClass("three", when: hasThree)
+                            .AddClass("four")
+                            .AddClass("five", when: hasFive)
+                            .Build();
+            //assert
+            ClassToRender.Should().Be("default item-three item-four");
+        }
+
+        [Fact]
+        public void ShouldBulidConditionalCssClassesUsingMultiplePrefixes()
+        {
+            //arrange
+            var hasTwo = true;
+            var hasThree = true;
+            Func<bool> hasFive = () => false;
+
+            //act
+            var ClassToRender = new CssBuilder("default")
+                            .AddClass("no-prefix-two", when: hasTwo)
+                            .SetPrefix("item-")
+                            .AddClass("three", when: hasThree)
+                            .SetPrefix("namespace-")
+                            .AddClass("four")
+                            .AddClass("five", when: hasFive)
+                            .Build();
+            //assert
+            ClassToRender.Should().Be("default no-prefix-two item-three namespace-four");
+        }
+
+        [Fact]
+        public void ShouldBuildClassesFromAttributesWithPrefix()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", "my-custom-class-1" } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .SetPrefix("pre-")
+                                .AddClassFromAttributes(attributes)
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one pre-my-custom-class-1");
+            }
+        }
+
+        [Fact]
+        public void ShouldBuildClassesFromAttributesWithClearedPrefix()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", "my-custom-class-1" } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .SetPrefix("item-")
+                                .AddClass("two")
+                                .SetPrefix(String.Empty)
+                                .AddClassFromAttributes(attributes)
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one item-two my-custom-class-1");
+            }
+        }
     }
 }

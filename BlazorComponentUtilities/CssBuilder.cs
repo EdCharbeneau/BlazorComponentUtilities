@@ -1,11 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace BlazorComponentUtilities
 {
     public struct CssBuilder
     {
         private string stringBuffer;
+        private string prefix;
+
+        /// <summary>
+        /// Sets the prefix value to be appended to all classes added following the this statement. When SetPrefix is called it will overwrite any previous prefix set for this instance. Prefixes are applied when using AddValue.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>CssBuilder</returns>
+        public CssBuilder SetPrefix(string value)
+        {
+            prefix = value;
+            return this;
+        }
 
         /// <summary>
         /// Creates a CssBuilder used to define conditional CSS classes used in a component.
@@ -25,7 +38,11 @@ namespace BlazorComponentUtilities
         /// Call Build() to return the completed CSS Classes as a string. 
         /// </summary>
         /// <param name="value"></param>
-        public CssBuilder(string value) => stringBuffer = value;
+        public CssBuilder(string value)
+        {
+            stringBuffer = value;
+            prefix = String.Empty;
+        }
 
         /// <summary>
         /// Adds a raw string to the builder that will be concatenated with the next class or value added to the builder.
@@ -43,7 +60,7 @@ namespace BlazorComponentUtilities
         /// </summary>
         /// <param name="value">CSS Class to add</param>
         /// <returns>CssBuilder</returns>
-        public CssBuilder AddClass(string value) => AddValue(" " + value);
+        public CssBuilder AddClass(string value) => AddValue(" " + prefix + value);
 
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
@@ -60,7 +77,7 @@ namespace BlazorComponentUtilities
         /// <param name="when">Condition in which the CSS Class is added.</param>
         /// <returns>CssBuilder</returns>
         public CssBuilder AddClass(string value, Func<bool> when = null) => this.AddClass(value, when());
-        
+
         /// <summary>
         /// Adds a conditional CSS Class to the builder with space separator.
         /// </summary>
@@ -107,7 +124,8 @@ namespace BlazorComponentUtilities
         /// Finalize the completed CSS Classes as a string.
         /// </summary>
         /// <returns>string</returns>
-        public string Build() {
+        public string Build()
+        {
             // String buffer finalization code
             return stringBuffer != null ? stringBuffer.Trim() : string.Empty;
         }
