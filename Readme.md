@@ -69,6 +69,19 @@ protected override void OnParametersSet()
 }
 ```
 
+**Component Source Logic (refactor with [SetPrefix](https://github.com/EdCharbeneau/CssBuilder/wiki/CssBuilder.SetPrefix-Method))**
+```csharp
+protected override void OnParametersSet()
+{
+    ClassToRender = new CssBuilder(UserCss)
+                        .SetPrefix("bl-")
+                        .AddClass("nav-link")
+                        .AddClass("active", when: IsActive)
+                        .AddClass("disabled", when: Disabled)
+                        .Build();
+}
+```
+
 ## Dynamic values
 
 If you encounter a dynamic value where some string is added to a CSS class name, we can easily handle this as well.
