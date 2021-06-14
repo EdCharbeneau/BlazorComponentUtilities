@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 
 namespace BlazorComponentUtilities
 {
@@ -10,7 +9,7 @@ namespace BlazorComponentUtilities
         private string prefix;
 
         /// <summary>
-        /// Sets the prefix value to be appended to all classes added following the this statement. When SetPrefix is called it will overwrite any previous prefix set for this instance. Prefixes are applied when using AddValue.
+        /// Sets the prefix value to be appended to all classes added following the this statement. When SetPrefix is called it will overwrite any previous prefix set for this instance. Prefixes are not applied when using AddValue.
         /// </summary>
         /// <param name="value"></param>
         /// <returns>CssBuilder</returns>
