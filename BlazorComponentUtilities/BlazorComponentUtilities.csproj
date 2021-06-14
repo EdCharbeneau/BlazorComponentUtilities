@@ -13,9 +13,11 @@
     <Copyright>Ed Charbeneau</Copyright>
     <PackageIconUrl></PackageIconUrl>
     <Authors>Ed Charbeneau</Authors>
-    <Company>Blazor StateHasChanged Show</Company>
+    <Company>BlazorPro</Company>
     <Product>BlazorComponentUtilities CssBuilder</Product>
-    <PackageReleaseNotes>1.6.0
+    <PackageReleaseNotes>1.7.0
+    Added SetPrefix method to reduce reptititive class prefixing
+1.6.0
       Added Func&lt;string&gt; value overload for ValueBuilder
 1.5.0
       Added Func&lt;string&gt; value overload for StyleBuilder
@@ -28,10 +30,10 @@
       Added utility method for returning null for empty strings. This is useful for splatting scenarios.
       Added utility method for starting off new builders.
 </PackageReleaseNotes>
-    <Version>1.6.0</Version>
+    <Version>1.7.0</Version>
     <PackageIcon>blazor-glove-256.jpg</PackageIcon>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
+    <AssemblyVersion>1.7.0.0</AssemblyVersion>
+    <FileVersion>1.7.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,10 +45,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
 
 </Project>
