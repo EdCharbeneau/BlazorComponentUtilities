@@ -32,7 +32,7 @@ namespace BlazorComponentUtilities
         /// </summary>
         /// <param name="prop"></param>
         /// <param name="value"></param>
-        public StyleBuilder(string prop, string value) => stringBuffer = stringBuffer = $"{prop}:{value};";
+        public StyleBuilder(string prop, string value) => stringBuffer = $"{prop}:{value};";
 
         /// <summary>
         /// Adds a conditional in-line style to the builder with space separator and closing semicolon.
