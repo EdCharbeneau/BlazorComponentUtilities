@@ -15,12 +15,15 @@
     <Authors>Ed Charbeneau</Authors>
     <Company>BlazorPro</Company>
     <Product>BlazorComponentUtilities CssBuilder</Product>
-    <PackageReleaseNotes>1.7.1
-    Fixed trivial performance issue with redundant assignment when building strings
-1.7.0
-    Added SetPrefix method to reduce reptititive class prefixing
-1.6.0
-      Added Func&lt;string&gt; value overload for ValueBuilder
+    <PackageReleaseNotes>
+		1.8.0
+		Fixed null ref error when using AddClassFromAttributes and passing a null attribute value.
+		1.7.1
+		Fixed trivial performance issue with redundant assignment when building strings
+		1.7.0
+		Added SetPrefix method to reduce reptititive class prefixing
+		1.6.0
+		Added Func&lt;string&gt; value overload for ValueBuilder
 1.5.0
       Added Func&lt;string&gt; value overload for StyleBuilder
       Minor performance improvements for .Add*Attributes
@@ -32,10 +35,10 @@
       Added utility method for returning null for empty strings. This is useful for splatting scenarios.
       Added utility method for starting off new builders.
 </PackageReleaseNotes>
-    <Version>1.7.1</Version>
+    <Version>1.8.0</Version>
     <PackageIcon>blazor-glove-256.jpg</PackageIcon>
-    <AssemblyVersion>1.7.1.0</AssemblyVersion>
-    <FileVersion>1.7.1.0</FileVersion>
+    <AssemblyVersion>1.8.0.0</AssemblyVersion>
+    <FileVersion>1.8.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

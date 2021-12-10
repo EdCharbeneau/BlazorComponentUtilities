@@ -134,6 +134,23 @@ namespace BlazorComponentUtilities.Tests
         }
 
         [Fact]
+        public void ShouldNotThrowWhenNullForAttributeItem_BuildClassesFromAttributes()
+        {
+            {
+                //arrange
+                // Simulates Razor Components attribute splatting feature
+                IReadOnlyDictionary<string, object> attributes = new Dictionary<string, object> { { "class", null } };
+
+                //act
+                var ClassToRender = new CssBuilder("item-one")
+                                .AddClassFromAttributes(attributes)
+                                .Build();
+                //assert
+                ClassToRender.Should().Be("item-one");
+            }
+        }
+
+        [Fact]
         public void ForceNullForWhitespace_BuildClassesFromAttributes()
         {
             {
